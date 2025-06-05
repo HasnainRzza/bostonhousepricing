@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>House Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f7f9fc;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .form-group {
+            width: 30%;
+            min-width: 250px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type=number] {
+            width: 100%;
+            padding: 8px;
+        }
+        input[type=submit] {
+            padding: 12px 24px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 30px;
+            font-size: 1.3em;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Predict House Price</h1>
+    <form action="/predict" method="POST">
+        {% for i in range(1, 14) %}
+            <div class="form-group">
+                <label>Feature {{ i }}:</label>
+                <input type="number" name="feature{{ i }}" step="any" required>
+            </div>
+        {% endfor %}
+        <input type="submit" value="Predict Price">
+    </form>
+
+    {% if prediction_text %}
+        <div class="result">
+            {{ prediction_text }}
+        </div>
+    {% endif %}
+</body>
+</html>
